@@ -5,7 +5,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0005_item_stock_no'),
+        ('core', '0005_auto_20240517_1754'),
     ]
 
     operations = [
