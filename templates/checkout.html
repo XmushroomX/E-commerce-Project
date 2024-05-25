@@ -42,9 +42,8 @@
  
     <div class="container">
   <div class="py-5 text-center">
-    <img class="d-block mx-auto mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
     <h2>Checkout form</h2>
-    <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+    
   </div>
 
   <div class="row">
@@ -108,14 +107,14 @@
 
         <h4 class="mb-3">Payment</h4>
 
-        <div class="d-block my-3">
-        	{% for value, name in form.fields.payment_option.choices %}
-          <div class="custom-control custom-radio">
-            <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input"  required>
-            <label class="custom-control-label" for="{{name}}">{{ name }}</label>
-          </div>
-          {% endfor %}
-        </div>
+<div class="d-block my-3">
+    {% for value, name in form.fields.payment_option.choices %}
+    <div class="custom-control custom-radio">
+        <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input" required>
+        <label class="custom-control-label" for="{{name}}">{{ name }}</label>
+    </div>
+    {% endfor %}
+</div>
         
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>

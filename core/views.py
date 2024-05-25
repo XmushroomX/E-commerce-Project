@@ -179,10 +179,6 @@ class CheckoutView(View):
                 apartment_address = form.cleaned_data.get('apartment_address')
                 country = form.cleaned_data.get('country')
                 zip = form.cleaned_data.get('zip')
-                # add functionality for these fields
-                # same_shipping_address = form.cleaned_data.get(
-                #     'same_shipping_address')
-                # save_info = form.cleaned_data.get('save_info')
                 payment_option = form.cleaned_data.get('payment_option')
                 billing_address = BillingAddress(
                     user=self.request.user,
@@ -196,15 +192,19 @@ class CheckoutView(View):
                 order.billing_address = billing_address
                 order.save()
 
-                # add redirect to the selected payment option
                 if payment_option == 'S':
                     return redirect('core:payment', payment_option='stripe')
                 elif payment_option == 'P':
                     return redirect('core:payment', payment_option='paypal')
                 else:
                     messages.warning(
-                        self.request, "Invalid payment option select")
+                        self.request, "Invalid payment option selected")
                     return redirect('core:checkout')
+            else:
+                messages.error(
+                    self.request, "Form is not valid, please check your input")
+                # Nếu form không hợp lệ, trả về trang checkout với form không hợp lệ
+                return self.get(*args, **kwargs)
         except ObjectDoesNotExist:
             messages.error(self.request, "You do not have an active order")
             return redirect("core:order-summary")
